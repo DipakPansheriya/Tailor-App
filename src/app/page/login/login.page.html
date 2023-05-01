@@ -1,0 +1,28 @@
+
+
+<ion-content [fullscreen]="true">
+  <ion-img src="../../../assets/appImage/shape.png"></ion-img>
+  <div class="text_item">
+    <h3>Welcome Back!</h3>
+  </div>
+  <div class="imageuser">
+    <ion-img src="../../../assets/appImage/undraw_my_notifications_rjej 1.png"></ion-img>
+  </div>
+  <div class="form_input">
+      <ion-input id="custom-input" label="Enter Your UserName" labelPlacement="floating" [(ngModel)]="emailId" [counter]="true" maxlength="50"></ion-input>
+      <ion-input id="custom-input" label="Enter Your Password" labelPlacement="floating" [(ngModel)]="password" type="Password" [counter]="true" maxlength="10"></ion-input>
+  </div>
+  <div class="forgot-Password">
+    <span routerLink="/forgotpassword">Forgot Password</span>
+  </div>
+  <div class="forgot-Password">
+    <span (click)="googleLogin()">Login With Google</span>
+  </div>
+  <div class="getStarted">
+    <button (click)="login()" id="present-alert">Sign In</button>
+  </div>
+  <div class="signIn">
+    <label>Don’t have an account ? <span routerLink="/register" >Sign Up</span></label>
+  </div>
+
+</ion-content>
