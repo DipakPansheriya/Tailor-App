@@ -47,7 +47,7 @@ export class Tab2Page implements OnInit {
   confirm() {
     if (this.mobileNo && this.lastName && this.firstName) {
       const payload: CustomerList = {
-        id: '',
+        id: this.customerId ? this.customerId : '',
         firstName: this.firstName,
         lastName: this.lastName,
         mobileNo: Number(this.mobileNo)
@@ -94,7 +94,6 @@ export class Tab2Page implements OnInit {
 
   decimalInputRestriction(event:any): any {
     const value = event.target.value;
-    console.log(event.target.value, value);
     if (this.allowedSpecialKeys.indexOf(event.key) !== -1) {
       return;
     }

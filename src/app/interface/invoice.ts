@@ -13,3 +13,10 @@ export interface CustomerList {
     lastName:string
     mobileNo:number
 }
+
+export interface Patterns {
+    id: string,
+    patternName: string,
+    patternPrice : number,
+    patternCategory : number,
+}

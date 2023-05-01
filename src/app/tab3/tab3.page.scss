@@ -14,3 +14,22 @@
         border-radius: 12px;
     }
 }
+.card_item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  .nameCard {
+    ion-card-subtitle {
+      font-size: 16px;
+      text-transform: inherit;
+      letter-spacing: 0.9px;
+    }
+  }
+
+  .card_mobilno {
+    ion-card-subtitle {
+      font-size: 16px;
+    }
+  }
+}

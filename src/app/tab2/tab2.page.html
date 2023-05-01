@@ -6,24 +6,18 @@
   </ion-toolbar>
 </ion-header>
 <ion-content class="ion-padding">
-  <!-- <ion-button expand="block" (click)="setOpenEdit(true)">Add Customer</ion-button> -->
   <div class="addcustomer">
     <button (click)="setOpenEdit(true)" id="present-alert">Add Customer</button>
   </div>
   <ion-card *ngFor="let item of customerData">
     <ion-card-header>
       <div class="card_item" (click)="setOpen(true , item)">
-        <!-- <div class="card-name-mo"> -->
           <div class="nameCard">
             <ion-card-subtitle style="font-size: 14px;">{{item.firstName}} {{item.lastName}}</ion-card-subtitle>
           </div>
           <div class="card_mobilno">
             <ion-card-subtitle style="font-size: 14px;">{{item.mobileNo}}</ion-card-subtitle>
           </div>
-        <!-- </div> -->
-        <!-- <div class="editData" (click)="setOpen(true , item)">
-          <ion-icon name="create-outline"></ion-icon>
-        </div> -->
       </div>
     </ion-card-header>
   </ion-card>
@@ -46,8 +40,7 @@
               <ion-input id="custom-input" label="Enter Your Mobil Number" labelPlacement="floating" [(ngModel)]="mobileNo"
                 [counter]="true" maxlength="20"></ion-input>
                 <div class="addcustomer">
-                  <!-- <ion-button  expand="block" (click)="confirm()">Submit</ion-button> -->
-                  <button (click)="confirm()" id="present-alert">Submit</button>
+                  <button (click)="confirm()" [disabled]="!firstName || !lastName || !mobileNo" [ngStyle]="{'background-color':!firstName || !lastName || !mobileNo  ? '#c1c1c1' : '#50C2C9' }"  id="present-alert">Submit</button>
                 </div>
         </ion-content>
       </ng-template>
@@ -70,8 +63,7 @@
               <ion-input id="custom-input" label="Enter Your Mobil Number" labelPlacement="floating" [(ngModel)]="mobileNo"
                 [counter]="true" maxlength="10" (keydown)="decimalInputRestriction($event)"></ion-input>
                 <div class="addcustomer">
-                  <!-- <ion-button  expand="block" (click)="confirm()">Submit</ion-button> -->
-                  <button (click)="confirm()" id="present-alert">Submit</button>
+                  <button (click)="confirm()" [disabled]="!firstName || !lastName || !mobileNo" [ngStyle]="{'background-color':!firstName || !lastName || !mobileNo  ? '#c1c1c1' : '#50C2C9' }"  id="present-alert">Submit</button>
                 </div>
             </ion-content>
       </ng-template>

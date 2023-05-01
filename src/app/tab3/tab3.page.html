@@ -7,30 +7,27 @@
 </ion-header>
 <ion-content class="ion-padding">
   <div class="addcustomer">
-    <button (click)="setOpen(true)" id="present-alert">Add Extra Info</button>
+    <button (click)="setOpen(true, '')" id="present-alert">Add Extra Info</button>
   </div>
-    <!-- <ion-grid class="ion-margin">
-      <ion-row>
-        <ion-col>S.No</ion-col>
-        <ion-col>Name</ion-col>
-        <ion-col>Gender</ion-col>
-        <ion-col>Country</ion-col>
-      </ion-row>
-      <ion-row >
-        <ion-col>name</ion-col>
-        <ion-col>name</ion-col>
-        <ion-col>name</ion-col>
-        <ion-col>name</ion-col>
-      </ion-row>
-    </ion-grid> -->
-
+  <ion-card *ngFor="let item of patternData">
+    <ion-card-header>
+      <div class="card_item" (click)="editDataOpen(true , item)">
+          <div class="nameCard">
+            <ion-card-subtitle style="font-size: 14px;">{{item.patternName}} {{item.patternCategory}}</ion-card-subtitle>
+          </div>
+          <div class="card_mobilno">
+            <ion-card-subtitle style="font-size: 14px;">{{item.patternPrice}} ₹</ion-card-subtitle>
+          </div>
+      </div>
+    </ion-card-header>
+  </ion-card>
   <ion-modal [isOpen]="isModalOpen">
     <ng-template>
       <ion-header>
         <ion-toolbar>
           <ion-title>Extra Info</ion-title>
           <ion-buttons slot="end">
-            <ion-button (click)="setOpen(false)">Close</ion-button>
+            <ion-button (click)="setOpen(false , '')">Close</ion-button>
           </ion-buttons>
         </ion-toolbar>
       </ion-header>
@@ -42,14 +39,17 @@
         <label>Select Type</label>
         <ion-list>
           <ion-item>
-            <ion-select aria-label="Fruit" placeholder="Select fruit" (ionChange)="handleChange($event)">
-              <ion-select-option value="pant">Pant</ion-select-option>
-              <ion-select-option value="shirt">Shirt</ion-select-option>
+            <ion-select aria-label="Fruit" [(ngModel)]="selectedType" placeholder="Select fruit" (ionChange)="handleChange($event)">
+              <ion-select-option value="Pent">Pent</ion-select-option>
+              <ion-select-option value="Shirt">Shirt</ion-select-option>
             </ion-select>
           </ion-item>
         </ion-list>
         <div class="addcustomer">
           <button (click)="submit(false)" [disabled]="!infotmation || !price || !this.selectedType" [ngStyle]="{'background-color':!infotmation || !price || !this.selectedType  ? '#c1c1c1' : '#50C2C9' }" style="margin: 10px;" id="present-alert">Submit</button>
+        </div>
+        <div class="addcustomer" *ngIf="isDelete">
+          <button (click)="deleteData()" style="margin: 10px; background: red;" id="present-alert">Delete</button>
         </div>
       </ion-content>
     </ng-template>

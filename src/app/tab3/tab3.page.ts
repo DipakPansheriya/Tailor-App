@@ -1,12 +1,14 @@
-import { Component, ElementRef, NgZone, ViewChild } from '@angular/core';
+import { Component, ElementRef, NgZone, OnInit, ViewChild } from '@angular/core';
 import styler, { Styler } from 'stylefire';
 import { animate as PopmotionAnimate } from 'popmotion';
+import { FirebaseService } from '../service/firebase.service';
+import { Patterns } from '../interface/invoice';
 @Component({
   selector: 'app-tab3',
   templateUrl: 'tab3.page.html',
   styleUrls: ['tab3.page.scss']
 })
-export class Tab3Page {
+export class Tab3Page implements OnInit {
   @ViewChild('dynamicIsland') dynamicIsland: ElementRef | any;
   dynamicIslandIsOpen = false;
   public styler: Styler;
@@ -15,10 +17,16 @@ export class Tab3Page {
   infotmation :any
   price :any
   selectedType :any
+  patternId :any
+  editData :any
+  patternData :any = []
+  isDelete :boolean
 
 
-  constructor(private ngZone: NgZone) {}
-
+  constructor(private ngZone: NgZone , private firebaseService: FirebaseService) {}
+  ngOnInit(): void {
+    this.getAllData()
+  }
 
   ngAfterViewInit(): void {
     // this.styler = styler(this.dynamicIsland.nativeElement);
@@ -93,8 +101,22 @@ export class Tab3Page {
   }
 
 
-  setOpen(isOpen: boolean) {
+  setOpen(isOpen: boolean , data:any) {
+    this.isDelete = false
     this.isModalOpen = isOpen;
+    this.infotmation = ''
+    this.price = ''
+    this.selectedType = ''
+  }
+
+  editDataOpen(isOpen: boolean , data:any) {
+    this.isModalOpen = isOpen;
+    this.infotmation = data.patternName
+    this.price = data.patternPrice
+    this.selectedType = data.patternCategory
+    this.patternId = data.id
+    this.editData = data
+    this.isDelete = true
   }
 
   handleChange(e:any) {
@@ -102,13 +124,35 @@ export class Tab3Page {
   }
   
   submit(isOpen :any){
-    const payload = {
-      infotmation :this.infotmation,
-      price :this.price,
-      selectedType :this.selectedType
-    }
     this.isModalOpen = isOpen;
-    console.log("payload=========", payload);
-    
+    const payload : Patterns =  {
+      id: this.patternId ? this.patternId :'',
+      patternName: this.infotmation,
+      patternPrice: this.price,
+      patternCategory: this.selectedType
+    }
+
+    if(!this.patternId){
+      this.firebaseService.addPattern(payload).then((res)=>{
+      }) 
+    }else{
+      this.firebaseService.updatePattern(this.patternId ,payload).then((res)=>{
+      }) 
+    }
+  }
+
+  getAllData(){
+    this.firebaseService.getAllPatterns().subscribe(res => {
+      if(res){
+        this.patternData = res        
+      }
+    })
+  }
+
+  deleteData(){
+    this.firebaseService.deletePattern(this.editData).then(res => {
+
+    })
+    this.isModalOpen = false
   }
 }

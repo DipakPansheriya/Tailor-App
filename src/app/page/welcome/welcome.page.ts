@@ -20,17 +20,14 @@ export class WelcomePage implements OnInit , OnDestroy {
 
 
     this.networkListener = await Network.addListener('networkStatusChange', status => {
-      // console.log('Network status changed', status);
       this.ngZone.run(() => {
         this.changeStatus(status)
       })
     });
     
     const status = await Network.getStatus();
-    // console.log("Network Status " , status)
 
     this.changeStatus(status)
-    // console.log("Network Status " ,this.status)
 
     setTimeout(() => {
       this.openPageLogo =false
