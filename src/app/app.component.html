@@ -1,0 +1,18 @@
+<ion-app>
+  <ion-router-outlet></ion-router-outlet>
+</ion-app>
+
+<ion-modal [isOpen]="status == false">
+  <ng-template>
+    <div>
+      <ion-img src="../../../assets/appImage/shape.png"></ion-img>
+      <div class="networks_item">
+        <div class="image_net">
+          <ion-img src="../../../assets/appImage/not net.gif"></ion-img>
+        </div>
+        <h3>Not Connection !!</h3>
+        <label>Your internet connection was interrupted please try again later</label>
+      </div>
+    </div>
+  </ng-template>
+</ion-modal>

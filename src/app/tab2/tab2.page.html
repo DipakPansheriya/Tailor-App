@@ -1,0 +1,82 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>
+      Customer
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content class="ion-padding">
+  <!-- <ion-button expand="block" (click)="setOpenEdit(true)">Add Customer</ion-button> -->
+  <div class="addcustomer">
+    <button (click)="setOpenEdit(true)" id="present-alert">Add Customer</button>
+  </div>
+  <ion-card *ngFor="let item of customerData">
+    <ion-card-header>
+      <div class="card_item" (click)="setOpen(true , item)">
+        <!-- <div class="card-name-mo"> -->
+          <div class="nameCard">
+            <ion-card-subtitle style="font-size: 14px;">{{item.firstName}} {{item.lastName}}</ion-card-subtitle>
+          </div>
+          <div class="card_mobilno">
+            <ion-card-subtitle style="font-size: 14px;">{{item.mobileNo}}</ion-card-subtitle>
+          </div>
+        <!-- </div> -->
+        <!-- <div class="editData" (click)="setOpen(true , item)">
+          <ion-icon name="create-outline"></ion-icon>
+        </div> -->
+      </div>
+    </ion-card-header>
+  </ion-card>
+</ion-content>
+    <ion-modal [isOpen]="isModalOpen">
+      <ng-template>
+        <ion-header>
+          <ion-toolbar>
+            <ion-title>Edit Customer</ion-title>
+            <ion-buttons slot="end">
+              <ion-button (click)="setOpen(false , '')">Close</ion-button>
+            </ion-buttons>
+          </ion-toolbar>
+        </ion-header>
+        <ion-content class="ion-padding">
+              <ion-input id="custom-input" label="Enter Your First Name" labelPlacement="floating" [(ngModel)]="firstName"
+                [counter]="true" maxlength="20"></ion-input>
+              <ion-input id="custom-input" label="Enter Your Last Name" labelPlacement="floating" [(ngModel)]="lastName"
+                [counter]="true" maxlength="20"></ion-input>
+              <ion-input id="custom-input" label="Enter Your Mobil Number" labelPlacement="floating" [(ngModel)]="mobileNo"
+                [counter]="true" maxlength="20"></ion-input>
+                <div class="addcustomer">
+                  <!-- <ion-button  expand="block" (click)="confirm()">Submit</ion-button> -->
+                  <button (click)="confirm()" id="present-alert">Submit</button>
+                </div>
+        </ion-content>
+      </ng-template>
+    </ion-modal>
+    <ion-modal [isOpen]="isModalOpenEdit">
+      <ng-template>
+        <ion-header>
+          <ion-toolbar>
+            <ion-title>Add Customer</ion-title>
+            <ion-buttons slot="end">
+              <ion-button (click)="setOpenEdit(false)">Close</ion-button>
+            </ion-buttons>
+          </ion-toolbar>
+        </ion-header>
+        <ion-content class="ion-padding">
+              <ion-input id="custom-input" label="Enter Your First Name" labelPlacement="floating" [(ngModel)]="firstName"
+                [counter]="true" maxlength="20"></ion-input>
+              <ion-input id="custom-input" label="Enter Your Last Name" labelPlacement="floating" [(ngModel)]="lastName"
+                [counter]="true" maxlength="20"></ion-input>
+              <ion-input id="custom-input" label="Enter Your Mobil Number" labelPlacement="floating" [(ngModel)]="mobileNo"
+                [counter]="true" maxlength="10" (keydown)="decimalInputRestriction($event)"></ion-input>
+                <div class="addcustomer">
+                  <!-- <ion-button  expand="block" (click)="confirm()">Submit</ion-button> -->
+                  <button (click)="confirm()" id="present-alert">Submit</button>
+                </div>
+            </ion-content>
+      </ng-template>
+    </ion-modal>
+
+    <!-- <div class="center-body" *ngIf="!isLoader">
+      <div class="loader-circle-2"></div>
+      </div> -->

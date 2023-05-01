@@ -1,0 +1,22 @@
+
+
+<ion-content [fullscreen]="true">
+  <ion-img src="../../../assets/appImage/shape.png"></ion-img>
+  
+  <div class="text_item">
+    <h3>Welcome Onboard!</h3>
+    <label>Let’s help you meet up your tasks</label>
+  </div>
+  <div class="form_input">
+    <ion-input id="custom-input" label="Enter Your Full Name" labelPlacement="floating" [counter]="true" maxlength="20"></ion-input>
+    <ion-input id="custom-input" label="Enter Your Email" [(ngModel)]="email" labelPlacement="floating" [counter]="true" maxlength="50"></ion-input>
+    <ion-input id="custom-input" label="Enter Password" labelPlacement="floating" [(ngModel)]="password" type="Password" [counter]="true" maxlength="10"></ion-input>
+    <ion-input id="custom-input" label="Enter Comfirm Password" labelPlacement="floating" type="Password" [counter]="true" maxlength="10"></ion-input>
+</div>
+  <div class="getStarted">
+    <button (click)="singUp()">Register</button>
+  </div>
+  <div class="signIn">
+    <label>Already have an account ? <span routerLink="/login" >Sign In</span></label>
+  </div>
+</ion-content>

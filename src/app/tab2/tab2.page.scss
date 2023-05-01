@@ -1,0 +1,110 @@
+ion-icon {
+  font-size: 27px;
+
+}
+
+.addcustomer{
+	text-align: center;
+	padding: 10px;
+	button{
+		height: 44px;
+		width: 313px;
+		border-radius: 0px;
+		background: #50C2C9;
+		color: white;
+		font-weight: 600;
+		font-size: 18px;
+		line-height: 137.19%;
+		border-radius: 12px;
+	}
+}
+
+ion-card-header {
+  padding: 15px;
+}
+
+.card_item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  .nameCard {
+    ion-card-subtitle {
+      font-size: 16px;
+      text-transform: inherit;
+      letter-spacing: 0.9px;
+    }
+  }
+
+  .card_mobilno {
+    ion-card-subtitle {
+      font-size: 16px;
+    }
+  }
+}
+
+// loading css
+
+
+.center-body {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 100%;
+	position: absolute;
+//   top: 45%;
+  height: 100vh;
+  background: #fff;
+}
+
+.loader-circle-2 {
+	position: relative;
+	width: 70px;
+	height: 70px;
+	display: inline-block;
+}
+.loader-circle-2:before,
+.loader-circle-2:after {
+	content: "";
+	display: block;
+	position: absolute;
+	border-width: 5px;
+	border-style: solid;
+	border-radius: 50%;
+}
+.loader-circle-2:before {
+	width: 70px;
+	height: 70px;
+	border-bottom-color: black;
+	border-right-color: black;
+	border-top-color: transparent;
+	border-left-color: transparent;
+	animation: loader-circle-2-animation-2 1s linear infinite;
+}
+.loader-circle-2:after {
+	width: 40px;
+	height: 40px;
+	border-bottom-color: black;
+	border-right-color: black;
+	border-top-color: transparent;
+	border-left-color: transparent;
+	top: 22%;
+	left: 22%;
+	animation: loader-circle-2-animation 0.85s linear  infinite;
+}
+@keyframes loader-circle-2-animation {
+	0% {
+		transform: rotate(0deg);
+	}
+	100% {
+		transform: rotate(-360deg);
+	}
+}
+@keyframes loader-circle-2-animation-2 {
+	0% {
+		transform: rotate(0deg);
+	}
+	100% {
+		transform: rotate(360deg);
+	}
+}

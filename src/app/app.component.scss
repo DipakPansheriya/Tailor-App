@@ -1,0 +1,29 @@
+ion-img {
+    width: 50%;
+}
+.networks_item{
+    text-align: center;
+    padding: 20px 45px;
+
+    .image_net{
+        width: 225%;
+    }
+    h3 {
+        font-style: normal;
+        font-weight: 600;
+        font-size: 21px;
+        line-height: 115.69%;
+        letter-spacing: 0.06em;
+        color: rgba(0, 0, 0, 0.75);
+
+    }
+    label {
+        font-style: normal;
+        font-weight: 400;
+        font-size: 18px;
+        line-height: 137.19%;
+        text-align: center;
+        letter-spacing: 0.06em;
+        color: rgba(0, 0, 0, 0.74);
+    }
+}
