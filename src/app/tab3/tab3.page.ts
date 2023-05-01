@@ -11,17 +11,22 @@ export class Tab3Page {
   dynamicIslandIsOpen = false;
   public styler: Styler;
   private defaultDimensions:any; 
+  isModalOpen = false;
+  infotmation :any
+  price :any
+  selectedType :any
+
 
   constructor(private ngZone: NgZone) {}
 
 
   ngAfterViewInit(): void {
-    this.styler = styler(this.dynamicIsland.nativeElement);
-    this.defaultDimensions = {
-      borderRadius: this.styler.get('borderRadius'),
-      width: this.styler.get('width'),
-      height: this.styler.get('height'),
-    }
+    // this.styler = styler(this.dynamicIsland.nativeElement);
+    // this.defaultDimensions = {
+    //   borderRadius: this.styler.get('borderRadius'),
+    //   width: this.styler.get('width'),
+    //   height: this.styler.get('height'),
+    // }
   }
 
   // Update this 👇
@@ -87,4 +92,23 @@ export class Tab3Page {
     })
   }
 
+
+  setOpen(isOpen: boolean) {
+    this.isModalOpen = isOpen;
+  }
+
+  handleChange(e:any) {
+    this.selectedType = e.detail.value
+  }
+  
+  submit(isOpen :any){
+    const payload = {
+      infotmation :this.infotmation,
+      price :this.price,
+      selectedType :this.selectedType
+    }
+    this.isModalOpen = isOpen;
+    console.log("payload=========", payload);
+    
+  }
 }

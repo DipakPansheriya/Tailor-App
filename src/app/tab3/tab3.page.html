@@ -1,58 +1,57 @@
-<!-- <ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>
-      Setting
+<ion-header [translucent]="true">
+  <ion-toolbar style="border-radius: 0px 0px 20px 20px;">
+    <ion-title style="background-color: #50C2C9;color: #fff;">
+      Extra Info
     </ion-title>
   </ion-toolbar>
-</ion-header> -->
+</ion-header>
+<ion-content class="ion-padding">
+  <div class="addcustomer">
+    <button (click)="setOpen(true)" id="present-alert">Add Extra Info</button>
+  </div>
+    <!-- <ion-grid class="ion-margin">
+      <ion-row>
+        <ion-col>S.No</ion-col>
+        <ion-col>Name</ion-col>
+        <ion-col>Gender</ion-col>
+        <ion-col>Country</ion-col>
+      </ion-row>
+      <ion-row >
+        <ion-col>name</ion-col>
+        <ion-col>name</ion-col>
+        <ion-col>name</ion-col>
+        <ion-col>name</ion-col>
+      </ion-row>
+    </ion-grid> -->
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Setting</ion-title>
-    </ion-toolbar>
-  </ion-header>
-<div class="date">
-  <ion-datetime-button datetime="datetime"></ion-datetime-button>
-
-  <ion-modal [keepContentsMounted]="true">
+  <ion-modal [isOpen]="isModalOpen">
     <ng-template>
-      <ion-datetime id="datetime"></ion-datetime>
+      <ion-header>
+        <ion-toolbar>
+          <ion-title>Extra Info</ion-title>
+          <ion-buttons slot="end">
+            <ion-button (click)="setOpen(false)">Close</ion-button>
+          </ion-buttons>
+        </ion-toolbar>
+      </ion-header>
+      <ion-content class="ion-padding">
+        <ion-input id="custom-input" label="Enter Your Infotmation" labelPlacement="floating" [(ngModel)]="infotmation"
+        [counter]="true" maxlength="20"></ion-input>
+        <ion-input id="custom-input" label="Enter Your Price"type="Number" labelPlacement="floating" [(ngModel)]="price"
+        [counter]="true" maxlength="20"></ion-input>
+        <label>Select Type</label>
+        <ion-list>
+          <ion-item>
+            <ion-select aria-label="Fruit" placeholder="Select fruit" (ionChange)="handleChange($event)">
+              <ion-select-option value="pant">Pant</ion-select-option>
+              <ion-select-option value="shirt">Shirt</ion-select-option>
+            </ion-select>
+          </ion-item>
+        </ion-list>
+        <div class="addcustomer">
+          <button (click)="submit(false)" [disabled]="!infotmation || !price || !this.selectedType" [ngStyle]="{'background-color':!infotmation || !price || !this.selectedType  ? '#c1c1c1' : '#50C2C9' }" style="margin: 10px;" id="present-alert">Submit</button>
+        </div>
+      </ion-content>
     </ng-template>
   </ion-modal>
-</div>
-</ion-content>
-
-<ion-content [fullscreen]="true">
-  
-  <div class="dynamic-island-container">
-
-    <div #dynamicIsland class="dynamic-island" (click)="toggleDynamicIsland()">
-      <!-- Add this 👇 -->
-      <ng-container *ngIf="dynamicIslandIsOpen">
-        <div class="dynamic-island-contents-container">
-          <div class="info-container">
-            <img src="https://avatars.githubusercontent.com/u/80924473?s=200&v=4"/>
-            <div class="texts-container">
-              <span class="playlist">This is Angular</span>
-              <span class="title">Animations are pretty cool</span>
-            </div>
-          </div>
-
-          <div class="progress-container">
-            <span>3:20</span>
-            <ion-progress-bar mode="ios" value="0.7"></ion-progress-bar>
-            <span>-1:30</span>
-          </div>
-
-          <div class="controls-container">
-            <ion-icon name="play-back"></ion-icon>
-            <ion-icon name="play"></ion-icon>
-            <ion-icon name="play-forward"></ion-icon>
-          </div>
-
-        </div>
-      </ng-container>
-    </div>
-  </div>
 </ion-content>

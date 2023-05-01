@@ -1,90 +1,16 @@
-.date{
-    margin-top: 10%;
-}
-
-ion-content {
-    --background: linear-gradient(to top right, #09033D, #276176);
-  }
-  .dynamic-island-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding-top: 11px;
-    padding: 0;
-    .dynamic-island {
-      width: 126px;
-      height: 37.33px;
-      border-radius: 18.67px;
-      background-color: #222329;
   
-      // Add this 👇
-      .dynamic-island-contents-container {
-        display: flex;
-        flex-direction: column;
-        height: 100%;
-        padding: 15px;
-        .info-container {
-          display: flex;
-          flex-direction: row;
-          img {
-            background-color: #fff;
-            width: 50px;
-            height: 50px;
-            border-radius: 10px;
-          }
-          .texts-container {
-            display: flex;
-            flex-direction: column;
-            margin-left: 10px;
-            align-self: center;
-            span {
-              &.playlist {
-                font-size: 0.7rem;
-                color: #999;
-              }
-              &.title {
-                font-size: 1rem;
-                font-weight: 500;
-                color: #fff;
-                margin-top: 2px;
-              }
-            }
-          }
-        }
-        
-        .progress-container {
-          display: flex;
-          flex-direction: row;
-          align-items: center;
-          padding: 10px 0;
-          ion-progress-bar {
-            height: 3px;
-            flex-grow: 1;
-            margin: 0 5px;
-            --background: #555;
-            --progress-background: #fff;
-          }
-        
-          span {
-            font-size: 0.7rem;
-            color: #888;
-          }
-        }
-        .controls-container {
-          display: flex;
-          flex-direction: row;
-          align-self: center;
-          ion-icon {
-            color: #fff;
-            margin: 0 10px;
-            font-size: 2rem;
-          }
-        }
-      }
+  .addcustomer{
+    text-align: center;
+    
+    button{
+        height: 44px;
+        width: 313px;
+        border-radius: 0px;
+        background: #50C2C9;
+        color: white;
+        font-weight: 600;
+        font-size: 18px;
+        line-height: 137.19%;
+        border-radius: 12px;
     }
-  }
-
-  ::ng-deep .inner-scroll {
-    padding: 0;
-    padding-top: 20px;  
-  }
+}
