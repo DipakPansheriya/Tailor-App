@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { UserInfo } from 'src/app/interface/invoice';
 import { AuthService } from 'src/app/service/auth.service';
+import { FirebaseService } from 'src/app/service/firebase.service';
 import Swal from 'sweetalert2'
 
 
@@ -11,11 +13,12 @@ import Swal from 'sweetalert2'
 })
 export class RegisterPage implements OnInit {
 
-  constructor( private authService:AuthService , private router :Router) { }
+  constructor( private authService:AuthService , private router :Router , private firebaseService: FirebaseService) { }
   email :any = ''
   password :any = ''
   
   ngOnInit() {
+  
   }
 
   singUp(){
@@ -31,7 +34,15 @@ export class RegisterPage implements OnInit {
         timer: 5000,
         title: 'Account Created Successfully'
       })
-      // this.router.navigate(['/login'])
+  
+      const payload : UserInfo = {
+        id: '',
+        userEmail: email
+      }
+      this.firebaseService.addUser(payload).then((res: any) => {
+       
+      })
+      
     }, (error) => {  
       Swal.fire({
         toast: true,

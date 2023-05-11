@@ -1,78 +1,463 @@
-<ion-header [translucent]="true">
+<ion-header>
   <ion-toolbar>
-    <ion-title style="background-color: #50C2C9;color: #fff;">
-      Order List
-    </ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>Order Master</ion-title>
+    <ion-buttons slot="primary">
+      <ion-button (click)="setOpenEdit(true)" id="present-alert">
+        <ion-icon name="add-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
- <ion-content class="ion-padding">
-    <div class="addcustomer">
-      <button (click)="setOpenEdit(true)" id="present-alert">Add Order</button>
-    </div>
-    <ion-card *ngFor="let item of searchFilterData">
-      <ion-card-header>
-        <div class="card_item" (click)="setOpen(true , item)">
-            <div class="nameCard">
-              <ion-card-subtitle style="font-size: 14px;">{{item.firstName}} {{item.lastName}}</ion-card-subtitle>
+<ion-content class="ion-padding">
+  <ion-list>
+    <ion-item-sliding>
+      <ion-item>
+        <ion-label>Sliding Item with Expandable Options</ion-label>
+      </ion-item>
+      <ion-item-options side="end">
+        <ion-item-option class="editData"><ion-icon name="create-outline"></ion-icon></ion-item-option>
+        <ion-item-option class="deleteData"><ion-icon name="trash-outline"></ion-icon></ion-item-option>
+      </ion-item-options>
+    </ion-item-sliding>
+  </ion-list>
+</ion-content>
+
+<ion-modal [isOpen]="isModalOpenEdit">
+  <ng-template>
+    <ion-header>
+      <ion-toolbar>
+        <ion-title>Select Customer</ion-title>
+        <ion-buttons slot="end">
+          <ion-button (click)="setOpenEdit(false)">Close</ion-button>
+        </ion-buttons>
+      </ion-toolbar>
+    </ion-header>
+    <ion-content class="ion-padding">
+      <div class="searchButton">
+        <ion-searchbar placeholder="Search Mobile" (keydown)="mobileInputRestriction($event)"  [(ngModel)]="searchbarData"></ion-searchbar>
+        <button (click)="searchData()">Search</button>
+      </div>
+        <div *ngIf="fullName">
+          <label>Customer Details</label>
+          <ion-item >
+            <div>
+              <ion-label>{{this.fullName}}</ion-label>
+              <ion-label>{{this.mobileNo}}</ion-label>
             </div>
-            <div class="card_mobilno">
-              <ion-card-subtitle style="font-size: 14px;">1234567890</ion-card-subtitle>
-            </div>
+          </ion-item>
         </div>
-      </ion-card-header>
-    </ion-card>
-  </ion-content>
-      <ion-modal [isOpen]="isModalOpen">
-        <ng-template>
-          <ion-header>
-            <ion-toolbar>
-              <ion-title>Edit Customer</ion-title>
-              <ion-buttons slot="end">
-                <ion-button (click)="setOpen(false , '')">Close</ion-button>
-              </ion-buttons>
-            </ion-toolbar>
-          </ion-header>
-          <ion-content class="ion-padding">
-                  <div class="addcustomer">
-                    <button (click)="confirm()" id="present-alert">Submit</button>
-                  </div>
-          </ion-content>
-        </ng-template>
-      </ion-modal>
-      <ion-modal [isOpen]="isModalOpenEdit">
-        <ng-template>
-          <ion-header>
-            <ion-toolbar>
-              <ion-title>Add Order</ion-title>
-              <ion-buttons slot="end">
-                <ion-button (click)="setOpenEdit(false)">Close</ion-button>
-              </ion-buttons>
-            </ion-toolbar>
-          </ion-header>
-          <ion-content class="ion-padding">
-            <div class="searchButton">
-              <ion-searchbar placeholder="Search Mobile Number" [(ngModel)]="searchbarData"></ion-searchbar>
-              <button (click)="searchData()">Search</button>
+        <div class="form" [formGroup]="jodiForm">
+      <ion-list *ngIf="fullName">
+        <label>Select Garment Type</label>
+        <ion-item>
+          <ion-select aria-label="Garment Type" [(ngModel)]="selectedType" placeholder="Select Type"
+            (ionChange)="selectType($event)" formControlName="garmentType">
+            <ion-select-option value="Pent">Pent</ion-select-option>
+            <ion-select-option value="Shirt">Shirt</ion-select-option>
+            <ion-select-option value="Jodi">Jodi</ion-select-option>
+          </ion-select>
+        </ion-item>
+      </ion-list>
+
+        <div class="row ordercard" *ngIf="this.selectedType === 'Pent'">
+          <h3 style="padding: 10px;">Pent Details</h3>
+          <div class="col-6">
+            <div class="input">
+                <div class="input-group">
+                  <span class="input-group-text">L</span>
+                  <input type="text" class="form-control" formControlName="pentL">
+                </div>
+                <div class="input-group">
+                  <span class="input-group-text">K</span>
+                  <input type="text" class="form-control" formControlName="pentK">
+                </div>
+                <div class="input-group">
+                  <span class="input-group-text">S</span>
+                  <input type="text" class="form-control" formControlName="shi">
+                </div>
+                <div class="input-group">
+                  <span class="input-group-text">MO</span>
+                  <input type="text" class="form-control" formControlName="mo">
+                </div>
             </div>
-            <div class="iamge_input">
-              <div class="image">
-                <ion-img src="../../assets/appImage/jodi.png"></ion-img>
-              </div>
-              <div class="image">
-                <ion-img src="../../assets/appImage/shirt.jpg"></ion-img>
-              </div>
+          </div>
+          <div class="col-6">
+            <div class="input-group">
+              <span class="input-group-text">Ja</span>
+              <input type="text" class="form-control" formControlName="ja">
+            </div>
+            <div class="input-group">
+              <span class="input-group-text">Jo</span>
+              <input type="text" class="form-control" formControlName="jo">
+            </div>
+            <div class="input-group">
+              <span class="input-group-text">Go</span>
+              <input type="text" class="form-control" formControlName="go">
+            </div>
+          </div>
+          <div class="mb-3">
+              <label>Select Delivery</label>
+              <p-calendar dateFormat="dd/mm/yy" [minDate]="currentDate" [showIcon]="true" formControlName="deliveryDate"></p-calendar>
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Quantity</label>
+            <input type="number" class="form-control" formControlName="pentQuantity">
+          </div>
+          <div class="mb-3">
+            <label for="exampleFormControlTextarea1" class="form-label">Additional Description</label>
+            <textarea class="form-control" formControlName="pentAdditionalDesc" id="exampleFormControlTextarea1" rows="3"></textarea>
+          </div>
+          <div class="multipleDrop">
+            <label>Select Pent Pattern</label>
+            <ion-list>
+              <ion-item>
+                <ion-select placeholder="Select" [multiple]="true"
+                  (ionChange)="jodiPatternSelection('pent')" formControlName="pentPatterns">
+                  <ion-select-option *ngFor="let item of pentPatternsList" [value]="item.id">{{item.patternName}}</ion-select-option>
+                </ion-select> 
+              </ion-item>
+            </ion-list>
+          </div>
+
+          <div *ngIf="selectedPentPatterns.length > 0">
+            <div class="patternDes">
+                <table class="table">
+                    <thead>
+                        <tr class="tHead">
+                            <th>Sr</th>
+                            <th>Pattern Name</th>
+                            <th>Price</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr  *ngFor="let item of selectedPentPatterns let i = index" >
+                            <td>{{i+1}}</td>
+                            <td>{{item.patternName}}</td>
+                            <td>{{item.patternPrice}}</td>
+                    
+                        </tr>
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <td colspan="2">Total Additional Cost</td>
+                            <td> <b> {{jodiForm.value.pentTotalExtraCost}} &#8377; </b>
+                            </td>
+                        </tr>
+                    </tfoot>
+                </table>
+            </div>
+          </div>
+        </div>
+  
+        <div class="row ordercard" *ngIf="this.selectedType === 'Shirt'">
+          <h3 style="padding: 10px;">Shirt Details</h3>
+          <ion-list>
+            <label class="m-3">Shirt Type</label>
+            <ion-item>
+              <ion-select aria-label="Shirt Type" interface="action-sheet" formControlName="shirtType" placeholder="Select Shirt Type">
+                <ion-select-option value="open">Open</ion-select-option>
+                <ion-select-option value="bushirt">Bushirt</ion-select-option>
+              </ion-select>
+            </ion-item>
+          </ion-list>
+          <div class="col-6">
+            <div class="input">
+                <div class="input-group">
+                  <span class="input-group-text">L</span>
+                  <input type="text" class="form-control" formControlName="shirtL">
+                </div>
+                <div class="input-group">
+                  <span class="input-group-text">BA</span>
+                  <input type="text" class="form-control" formControlName="ba">
+                </div>
+                <div class="input-group">
+                  <span class="input-group-text">CHA</span>
+                  <input type="text" class="form-control" formControlName="cha">
+                </div>
+            </div>
+          </div>
+          <div class="col-6">
+            <div class="input-group">
+              <span class="input-group-text">Ko</span>
+              <input type="text" class="form-control" formControlName="ko">
+            </div>
+            <div class="input-group">
+              <span class="input-group-text">K</span>
+              <input type="text" class="form-control" formControlName="shirtK">
+            </div>
+            <div class="input-group">
+              <span class="input-group-text">KH</span>
+              <input type="text" class="form-control" formControlName="kh">
+            </div>
+          </div>
+          <div class="input-group">
+            <span class="input-group-text">SHO</span>
+            <input type="text" class="form-control" formControlName="sho1">
+            <input type="text" class="form-control" formControlName="sho2">
+            <input type="text" class="form-control" formControlName="sho3">
+          </div>
+          <div class="input-group">
+            <span class="input-group-text">PE</span>
+            <input type="text" class="form-control" formControlName="pe1">
+            <input type="text" class="form-control" formControlName="pe2">
+            <input type="text" class="form-control" formControlName="pe3">
+            <input type="text" class="form-control" formControlName="pe4">
+          </div>
+          <div class="mb-3">
+              <label>Select Delivery</label>
+              <p-calendar formControlName="deliveryDate" [minDate]="currentDate" dateFormat="dd/mm/yy" [showIcon]="true"></p-calendar>
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Quantity</label>
+            <input type="number" class="form-control" formControlName="shirtQuantity">
+          </div>
+          <div class="mb-3">
+            <label for="exampleFormControlTextarea1" class="form-label">Additional Description</label>
+            <textarea class="form-control" formControlName="shirtAdditionalDesc" id="exampleFormControlTextarea1" rows="3"></textarea>
+          </div>
+          <div class="multipleDrop">
+            <label>Select Shirt Pattern</label>
+            <ion-list>
+              <ion-item>
+                <ion-select aria-label="Fruit" placeholder="Select" [multiple]="true"
+                  (ionChange)="jodiPatternSelection('shirt')" formControlName="shirtPatterns">
+                  <ion-select-option *ngFor="let item of shirtPatternsList" [value]="item.id">{{item.patternName}}</ion-select-option>
+                </ion-select> 
+              </ion-item>
+            </ion-list>
+          </div>
+          <div *ngIf="selectedShirtPatterns.length> 0">
+            <div class="patternDes">
+                <table class="table">
+                    <thead>
+                        <tr class="tHead">
+                            <th>Sr</th>
+                            <th>Pattern Name</th>
+                            <th>Price</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr  *ngFor="let item of selectedShirtPatterns let i = index" >
+                            <td>{{i+1}}</td>
+                            <td>{{item.patternName}}</td>
+                            <td>{{item.patternPrice}}</td>
+                    
+                        </tr>
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <td colspan="2">Total Additional Cost</td>
+                            <td> <b> {{jodiForm.value.shirtTotalExtraCost}} &#8377; </b>
+                            </td>
+                          </tr>
+                    </tfoot>
+                </table>
+            </div>
+          </div>
+        </div>
+
+        <div  *ngIf="this.selectedType === 'Jodi'">
+          <div class="row ordercard">
+            <h3 style="padding: 10px;">Pent Details</h3>
+            <div class="col-6">
               <div class="input">
-               <ion-input id="custom-input" label="Enter Your First Name" labelPlacement="floating"
-                    [counter]="true" maxlength="20"></ion-input>
-                  <ion-input id="custom-input" label="Enter Your Last Name" labelPlacement="floating" 
-                    [counter]="true" maxlength="20"></ion-input>
-                  <ion-input id="custom-input" label="Enter Your Mobil Number" labelPlacement="floating"
-                    [counter]="true" maxlength="20"></ion-input> 
+                  <div class="input-group">
+                    <span class="input-group-text">L</span>
+                    <input type="text" class="form-control" formControlName="pentL">
+                  </div>
+                  <div class="input-group">
+                    <span class="input-group-text">K</span>
+                    <input type="text" class="form-control" formControlName="pentK">
+                  </div>
+                  <div class="input-group">
+                    <span class="input-group-text">S</span>
+                    <input type="text" class="form-control" formControlName="shi">
+                  </div>
+                  <div class="input-group">
+                    <span class="input-group-text">MO</span>
+                    <input type="text" class="form-control" formControlName="mo">
+                  </div>
               </div>
             </div>
-                  <div class="addcustomer">
-                    <button  id="present-alert">Submit</button>
+            <div class="col-6">
+              <div class="input-group">
+                <span class="input-group-text">Ja</span>
+                <input type="text" class="form-control" formControlName="ja">
+              </div>
+              <div class="input-group">
+                <span class="input-group-text">Jo</span>
+                <input type="text" class="form-control" formControlName="jo">
+              </div>
+              <div class="input-group">
+                <span class="input-group-text">Go</span>
+                <input type="text" class="form-control" formControlName="go">
+              </div>
+            </div>
+            <div class="mb-3">
+              <label for="exampleFormControlTextarea1" class="form-label">Additional Description</label>
+              <textarea class="form-control" formControlName="pentAdditionalDesc" id="exampleFormControlTextarea1" rows="3"></textarea>
+            </div>
+            <div class="multipleDrop">
+              <label>Select Pent Pattern</label>
+              <ion-list>
+                <ion-item>
+                  <ion-select placeholder="Select" [multiple]="true"
+                    (ionChange)="jodiPatternSelection('pent')" formControlName="pentPatterns">
+                    <ion-select-option *ngFor="let item of pentPatternsList" [value]="item.id">{{item.patternName}}</ion-select-option>
+                  </ion-select> 
+                </ion-item>
+              </ion-list>
+            </div>
+            <div *ngIf="selectedPentPatterns.length > 0">
+              <div class="patternDes">
+                  <table class="table">
+                      <thead>
+                          <tr class="tHead">
+                              <th>Sr</th>
+                              <th>Pattern Name</th>
+                              <th>Price</th>
+                          </tr>
+                      </thead>
+                      <tbody>
+                          <tr  *ngFor="let item of selectedPentPatterns let i = index" >
+                              <td>{{i+1}}</td>
+                              <td>{{item.patternName}}</td>
+                              <td>{{item.patternPrice}}</td>
+                      
+                          </tr>
+                      </tbody>
+                      <tfoot>
+                          <tr>
+                              <td colspan="2">Total Additional Cost</td>
+                              <td> <b> {{jodiForm.value.pentTotalExtraCost}} &#8377; </b>
+                              </td>
+                          </tr>
+                      </tfoot>
+                  </table>
+              </div>
+            </div>
+          </div>
+          <div class="row ordercard mt-4">
+            <h3 style="padding: 10px;">Shirt Details</h3>
+            <ion-list>
+              <label class="m-3">Shirt Type</label>
+              <ion-item>
+                <ion-select aria-label="Shirt Type" interface="action-sheet" formControlName="shirtType" placeholder="Select Shirt Type">
+                  <ion-select-option value="open">Open</ion-select-option>
+                  <ion-select-option value="bushirt">Bushirt</ion-select-option>
+                </ion-select>
+              </ion-item>
+            </ion-list>
+            <div class="col-6">
+              <div class="input">
+                  <div class="input-group">
+                    <span class="input-group-text">L</span>
+                    <input type="text" class="form-control" formControlName="shirtL">
                   </div>
-              </ion-content>
-        </ng-template>
-      </ion-modal>
+                  <div class="input-group">
+                    <span class="input-group-text">BA</span>
+                    <input type="text" class="form-control" formControlName="ba">
+                  </div>
+                  <div class="input-group">
+                    <span class="input-group-text">CHA</span>
+                    <input type="text" class="form-control" formControlName="cha">
+                  </div>
+              </div>
+            </div>
+            <div class="col-6">
+              <div class="input-group">
+                <span class="input-group-text">Ko</span>
+                <input type="text" class="form-control" formControlName="ko">
+              </div>
+              <div class="input-group">
+                <span class="input-group-text">K</span>
+                <input type="text" class="form-control" formControlName="shirtK">
+              </div>
+              <div class="input-group">
+                <span class="input-group-text">KH</span>
+                <input type="text" class="form-control" formControlName="kh">
+              </div>
+            </div>
+            <div class="input-group">
+              <span class="input-group-text">SHO</span>
+              <input type="text" class="form-control" formControlName="sho1">
+              <input type="text" class="form-control" formControlName="sho2">
+              <input type="text" class="form-control" formControlName="sho3">
+            </div>
+            <div class="input-group">
+              <span class="input-group-text">PE</span>
+              <input type="text" class="form-control" formControlName="pe1">
+              <input type="text" class="form-control" formControlName="pe2">
+              <input type="text" class="form-control" formControlName="pe3">
+              <input type="text" class="form-control" formControlName="pe4">
+            </div>
+            <div class="mb-3">
+              <label for="exampleFormControlTextarea1" class="form-label">Additional Description</label>
+              <textarea class="form-control" formControlName="shirtAdditionalDesc" id="exampleFormControlTextarea1" rows="3"></textarea>
+            </div>
+            <div class="multipleDrop">
+              <label>Select Shirt Pattern</label>
+              <ion-list>
+                <ion-item>
+                  <ion-select aria-label="Fruit" placeholder="Select" [multiple]="true"
+                    (ionChange)="jodiPatternSelection('shirt')" formControlName="shirtPatterns">
+                    <ion-select-option *ngFor="let item of shirtPatternsList" [value]="item.id">{{item.patternName}}</ion-select-option>
+                  </ion-select> 
+                </ion-item>
+              </ion-list>
+            </div>
+            <div *ngIf="selectedShirtPatterns.length > 0">
+              <div class="patternDes">
+                  <table class="table">
+                      <thead>
+                          <tr class="tHead">
+                              <th>Sr</th>
+                              <th>Pattern Name</th>
+                              <th>Price</th>
+                          </tr>
+                      </thead>
+                      <tbody>
+                          <tr  *ngFor="let item of selectedShirtPatterns let i = index" >
+                              <td>{{i+1}}</td>
+                              <td>{{item.patternName}}</td>
+                              <td>{{item.patternPrice}}</td>
+                      
+                          </tr>
+                      </tbody>
+                      <tfoot>
+                          <tr>
+                              <td colspan="2">Total Additional Cost</td>
+                              <td> <b> {{jodiForm.value.shirtTotalExtraCost}} &#8377; </b>
+                              </td>
+                            </tr>
+                      </tfoot>
+                  </table>
+              </div>
+            </div>
+          </div>
+          <div class="ordercard mt-4 p-3">
+            <div class="mb-3">
+              <label>Select Delivery</label>
+              <p-calendar dateFormat="dd/mm/yy" [minDate]="currentDate" [showIcon]="true" formControlName="deliveryDate"></p-calendar>
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Quantity</label>
+            <input type="number" class="form-control" formControlName="jodiQuantity">
+          </div>
+          </div>
+        </div>
+        <div class="addcustomer">
+          <button type="submit" (click)="onSubmit()">SUBMIT</button>
+        </div>
+      </div>
+    </ion-content>
+  </ng-template>
+</ion-modal>
+<div class="addcustomer" style="margin: 30px 10px;">
+  <button (click)="logout()" id="present-alert">Logout</button>
+</div>
+
+<!-- <ion-loading class="custom-loading" trigger="open-loading" message="Loading..." ></ion-loading> -->

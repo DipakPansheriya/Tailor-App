@@ -14,16 +14,21 @@ import { initializeApp } from 'firebase/app';
 import { environment } from 'src/environments/environment';
 import { HttpClientModule } from '@angular/common/http';
 import { FIREBASE_OPTIONS } from '@angular/fire/compat';
-
-
-
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 @NgModule({
   declarations: [AppComponent],
   imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, 
     provideFirebaseApp(()=>initializeApp(environment.firebaseConfig)),
     provideFirestore(()=> getFirestore()),
     provideAuth(() => getAuth()),
-    provideStorage(()=> getStorage()) , HttpClientModule],
+    provideStorage(()=> getStorage()) , 
+    HttpClientModule,
+    BrowserModule,
+    BrowserAnimationsModule,
+    FormsModule,
+    ReactiveFormsModule
+  ],
   // providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy } ],
   providers: [
     { provide: FIREBASE_OPTIONS, useValue: environment.firebaseConfig,useClass: IonicRouteStrategy   }

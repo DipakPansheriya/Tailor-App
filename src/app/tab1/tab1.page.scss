@@ -9,7 +9,7 @@ ion-icon {
   
   .addcustomer{
       text-align: center;
-      // padding: 10px;
+      padding: 10px;
       button{
           height: 44px;
           width: 313px;
@@ -46,86 +46,128 @@ ion-icon {
       }
     }
   }
-  
-  // loading css
-  
-  
-  .center-body {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      width: 100%;
-      position: absolute;
-  //   top: 45%;
-    height: 100vh;
-    background: #fff;
-  }
-  
-  .loader-circle-2 {
-      position: relative;
-      width: 70px;
-      height: 70px;
-      display: inline-block;
-  }
-  .loader-circle-2:before,
-  .loader-circle-2:after {
-      content: "";
-      display: block;
-      position: absolute;
-      border-width: 5px;
-      border-style: solid;
-      border-radius: 50%;
-  }
-  .loader-circle-2:before {
-      width: 70px;
-      height: 70px;
-      border-bottom-color: black;
-      border-right-color: black;
-      border-top-color: transparent;
-      border-left-color: transparent;
-      animation: loader-circle-2-animation-2 1s linear infinite;
-  }
-  .loader-circle-2:after {
-      width: 40px;
-      height: 40px;
-      border-bottom-color: black;
-      border-right-color: black;
-      border-top-color: transparent;
-      border-left-color: transparent;
-      top: 22%;
-      left: 22%;
-      animation: loader-circle-2-animation 0.85s linear  infinite;
-  }
-  @keyframes loader-circle-2-animation {
-      0% {
-          transform: rotate(0deg);
-      }
-      100% {
-          transform: rotate(-360deg);
-      }
-  }
-  @keyframes loader-circle-2-animation-2 {
-      0% {
-          transform: rotate(0deg);
-      }
-      100% {
-          transform: rotate(360deg);
-      }
-  }
 
   .searchButton{
     display: flex;
-    align-items: center;
-    padding: 10px;
+    align-items: center;  
+    // padding: 10px;
 
     button{
-        height: 34px;
-        width: 103px;
-        border-radius: 0px;
-        background: #50C2C9;
-        color: white;
-        font-weight: 500;
-        font-size: 18px;
-        border-radius: 12px;
+      height: 39px;
+    width: 88px;
+    border-radius: 0px;
+    background: #50C2C9;
+    color: white;
+    font-weight: 500;
+    font-size: 18px;
+    border-radius: 5px;
     }
   }
+
+  .header-item{
+    background: #50C2C9;
+    height: 50px;
+    border-radius: 0 0 20px 20px;
+    align-items: center;
+
+    .orderlist{
+    display: flex;
+    justify-content: space-around;
+    align-items: flex-end;
+    }
+    span{
+      font-size: 25px;
+      color: white;
+      font-family: inherit;
+    }
+  }
+  ion-list{
+    padding: 3% 0;
+  }
+
+//   ion-toolbar {
+//     // --color: #50C2C9;
+//     // --background: #f1f1f1;
+// }
+.card{
+  box-shadow: rgba(17, 17, 26, 0.05) 0px 1px 0px, rgba(17, 17, 26, 0.1) 0px 0px 8px;
+}
+.patternDes{
+  width: 100%;
+  border-radius: 5px;
+  box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
+  .table{
+      width: 100%;
+  }
+}
+.input-group{
+  padding: 10px;
+}
+
+.height{
+  height: 100vh;
+ }
+ 
+
+ .search{
+ position: relative;
+ box-shadow: 0 0 40px rgba(51, 51, 51, .1);
+   
+ }
+
+ .search input{
+
+  height: 60px;
+  text-indent: 25px;
+  border: 2px solid #d6d4d4;
+
+
+ }
+
+
+ .search input:focus{
+
+  box-shadow: none;
+  border: 2px solid blue;
+
+
+ }
+
+ .search .fa-search{
+
+  position: absolute;
+  top: 20px;
+  left: 16px;
+
+ }
+
+ .search button{
+
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  height: 50px;
+  width: 110px;
+  background: blue;
+
+ }
+ .ordercard{
+  box-shadow: rgba(17, 17, 26, 0.05) 0px 1px 0px, rgba(17, 17, 26, 0.1) 0px 0px 8px;
+  background: white;
+  margin: 1px;
+  border-radius: 10px;
+  padding: 1px;
+  border: 1px solid #c1c1c1;
+ }
+  ::ng-deep .input-group>.form-control:focus{
+    box-shadow: none;
+ }
+ .editData{
+  background: #2dd36f;
+  border-radius: 10px;
+  margin-right: 3px;
+ }
+ .deleteData{
+  background: red;
+  border-radius: 10px;
+ }

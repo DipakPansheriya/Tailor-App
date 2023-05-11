@@ -55,10 +55,28 @@ export class Tab2Page implements OnInit {
       if (!this.customerId) {
         this.firebaseService.addData(payload).then((res) => {
           this.getAllData()
+          Swal.fire({
+            toast: true,
+            position: 'top',
+            showConfirmButton: false,
+            icon: 'success',
+            timerProgressBar:true,
+            timer: 5000,
+            title: 'Customer Created Successfully'
+          })
         }
         )
       } else {
         this.firebaseService.updateData(this.customerId, payload).then(res => {
+          Swal.fire({
+            toast: true,
+            position: 'top',
+            showConfirmButton: false,
+            icon: 'success',
+            timerProgressBar:true,
+            timer: 5000,
+            title: 'Customer Update Successfully'
+          })
         })
       }
     }

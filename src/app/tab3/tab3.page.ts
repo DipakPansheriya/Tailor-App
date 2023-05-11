@@ -3,6 +3,7 @@ import styler, { Styler } from 'stylefire';
 import { animate as PopmotionAnimate } from 'popmotion';
 import { FirebaseService } from '../service/firebase.service';
 import { Patterns } from '../interface/invoice';
+import Swal from 'sweetalert2'
 @Component({
   selector: 'app-tab3',
   templateUrl: 'tab3.page.html',
@@ -21,6 +22,7 @@ export class Tab3Page implements OnInit {
   editData :any
   patternData :any = []
   isDelete :boolean
+  
 
 
   constructor(private ngZone: NgZone , private firebaseService: FirebaseService) {}
@@ -134,9 +136,27 @@ export class Tab3Page implements OnInit {
 
     if(!this.patternId){
       this.firebaseService.addPattern(payload).then((res)=>{
+         Swal.fire({
+          toast: true,
+          position: 'top',
+          showConfirmButton: false,
+          icon: 'success',
+          timerProgressBar:true,
+          timer: 5000,
+          title: 'Pattern Created Successfully'
+        })
       }) 
     }else{
       this.firebaseService.updatePattern(this.patternId ,payload).then((res)=>{
+        Swal.fire({
+          toast: true,
+          position: 'top',
+          showConfirmButton: false,
+          icon: 'success',
+          timerProgressBar:true,
+          timer: 5000,
+          title: 'Pattern Upade Successfully'
+        })
       }) 
     }
   }
@@ -151,7 +171,15 @@ export class Tab3Page implements OnInit {
 
   deleteData(){
     this.firebaseService.deletePattern(this.editData).then(res => {
-
+      Swal.fire({
+        toast: true,
+        position: 'top',
+        showConfirmButton: false,
+        icon: 'success',
+        timerProgressBar:true,
+        timer: 5000,
+        title: 'Pattern Delete Successfully'
+      })
     })
     this.isModalOpen = false
   }

@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
-import { collectionData } from '@angular/fire/firestore';
+import { collectionData} from '@angular/fire/firestore';
 import { collection } from '@firebase/firestore';
 import { addDoc, deleteDoc, doc, updateDoc } from 'firebase/firestore';
-import { CustomerList, Patterns } from '../interface/invoice';
+import { CustomerList, OrderMaster, Patterns, UserInfo } from '../interface/invoice';
 import { Firestore } from '@angular/fire/firestore';
 
 
@@ -70,4 +70,36 @@ export class FirebaseService {
     return updateDoc(dataRef, Patterns)
   }
 
+    /////////////////////// User Data ////////////////////////
+
+
+  // add new data code here
+  addUser(data: UserInfo) {
+    data.id = doc(collection(this.fService, 'id')).id
+    return addDoc(collection(this.fService, 'UserData'), data)
+  }
+
+  // get all data from Shirt Patterns
+  getAllUserData() {
+    let dataRef = collection(this.fService, 'UserData')
+    return collectionData(dataRef, { idField: 'id' })
+  }
+    
+
+    // ============= Order Data CRUD
+    addOrderMaster(data: OrderMaster) {
+      data.id = doc(collection(this.fService, 'id')).id
+      return addDoc(collection(this.fService, 'OrderMaster'), data)
+    }
+  
+    getAllOrderMaster() {
+      let dataRef = collection(this.fService, 'OrderMaster')
+      return collectionData(dataRef, { idField: 'id' })
+    }
+  
+    updateOrderMaster(data: OrderMaster, OrderMaster: any) {
+      let dataRef = doc(this.fService, `OrderMaster/${data}`);
+      return updateDoc(dataRef, OrderMaster)
+    }
+  
 }
